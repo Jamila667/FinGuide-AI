@@ -76,10 +76,29 @@ export default function ChatInterface({ initialMessages }: { initialMessages: Me
           return updated;
         });
       }
+
+      // If stream finished but buffer is still empty, there was an API error
+      if (!buffer) {
+        setMessages((prev) => {
+          const updated = [...prev];
+          const lastIdx = updated.length - 1;
+          if (updated[lastIdx]?.role === "assistant" && !updated[lastIdx].content) {
+            updated[lastIdx] = { ...updated[lastIdx], content: "Kechirasiz, xatolik yuz berdi. Ehtimol API kaliti kiritilmagan yoki noto'g'ri." };
+          }
+          return updated;
+        });
+      }
     } catch (err) {
       if (err instanceof Error && err.name === "AbortError") return; // Cancelled
       setError("Xabar yuborishda xatolik yuz berdi. Qaytadan urinib ko'ring.");
       console.error("Chat error:", err);
+      // Remove empty assistant message if it failed completely
+      setMessages((prev) => {
+        if (prev.length > 0 && prev[prev.length - 1].role === "assistant" && !prev[prev.length - 1].content) {
+          return prev.slice(0, -1);
+        }
+        return prev;
+      });
     } finally {
       setIsLoading(false);
       abortControllerRef.current = null;
