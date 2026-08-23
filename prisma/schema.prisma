@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  password  String?
+  createdAt DateTime @default(now())
+
+  incomes            Income[]
+  expenses           Expense[]
+  savingsGoals       SavingsGoal[]
+  creditSimulations  CreditSimulation[]
+  advisorMessages    AdvisorMessage[]
+}
+
+model Income {
+  id        String   @id @default(uuid())
+  userId    String
+  amount    Float
+  currency  String   @default("UZS")
+  month     String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Expense {
+  id          String   @id @default(uuid())
+  userId      String
+  amount      Float
+  currency    String   @default("UZS")
+  category    String
+  description String?
+  date        DateTime
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model SavingsGoal {
+  id                  String   @id @default(uuid())
+  userId              String
+  name                String
+  targetAmount        Float
+  currentAmount       Float
+  monthlyContribution Float
+  currency            String   @default("UZS")
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model CreditSimulation {
+  id             String   @id @default(uuid())
+  userId         String
+  principal      Float
+  annualRate     Float
+  termMonths     Int
+  monthlyPayment Float
+  totalRepayment Float
+  totalInterest  Float
+  createdAt      DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model AdvisorMessage {
+  id        String   @id @default(uuid())
+  userId    String
+  role      String   // "user" or "assistant"
+  content   String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
