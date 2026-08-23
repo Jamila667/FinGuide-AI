@@ -1,4 +1,4 @@
-import { google } from "@ai-sdk/google";
+import { anthropic } from "@ai-sdk/anthropic";
 import { streamText } from "ai";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
@@ -63,7 +63,7 @@ Qisqa, ammo to'liq javob bering. Byudjetlash, tejash va aqlli xarajatlar bo'yich
 Foydalanuvchi o'zbek tilida yozsa, o'zbek tilida javob bering. Rus tilida yozsa, rus tilida javob bering.`;
 
   const result = streamText({
-    model: google("gemini-1.5-pro"),
+    model: anthropic("claude-3-5-sonnet-20241022"),
     system: systemPrompt,
     messages: messages.map((m) => ({
       role: m.role as "user" | "assistant",
