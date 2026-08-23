@@ -2,12 +2,17 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { addCreditSimulation, deleteCreditSimulation } from "@/app/dashboard/actions";
+import { redirect } from "next/navigation";
 
 export default async function CreditSimulatorPage() {
   const session = await getServerSession(authOptions);
-  const user = session?.user as { id: string; email: string } | undefined;
+  if (!session?.user?.email) redirect("/login");
 
-  if (!user || !user.id) return null;
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email },
+  });
+
+  if (!user) redirect("/login");
 
   const simulations = await prisma.creditSimulation.findMany({
     where: { userId: user.id },

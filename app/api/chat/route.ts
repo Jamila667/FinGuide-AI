@@ -28,6 +28,10 @@ export async function POST(req: Request) {
     return new Response("Bad request: messages required", { status: 400 });
   }
 
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return new Response("AI xizmat sozlanmagan", { status: 503 });
+  }
+
   // Rate limiting: max 5 messages per minute per user
   const oneMinuteAgo = new Date(Date.now() - 60 * 1000);
   const recentMessagesCount = await prisma.advisorMessage.count({
@@ -44,17 +48,7 @@ export async function POST(req: Request) {
     return new Response("Too many requests. Please try again in a minute.", { status: 429 });
   }
 
-  // Save user's new message to DB
   const lastMessage = messages[messages.length - 1];
-  if (lastMessage?.role === "user" && typeof lastMessage.content === "string") {
-    await prisma.advisorMessage.create({
-      data: {
-        userId: user.id,
-        role: "user",
-        content: lastMessage.content,
-      },
-    });
-  }
 
   // System prompt to guide the AI
   const systemPrompt = `Siz FinGuide AI — foydalanuvchi uchun ekspert moliyaviy maslahatchisiz.
@@ -72,15 +66,24 @@ Foydalanuvchi o'zbek tilida yozsa, o'zbek tilida javob bering. Rus tilida yozsa,
     onFinish: async ({ text }) => {
       if (text) {
         try {
-          await prisma.advisorMessage.create({
-            data: {
-              userId: user.id,
-              role: "assistant",
-              content: text,
-            },
-          });
+          await prisma.$transaction([
+            prisma.advisorMessage.create({
+              data: {
+                userId: user.id,
+                role: "user",
+                content: lastMessage.content,
+              },
+            }),
+            prisma.advisorMessage.create({
+              data: {
+                userId: user.id,
+                role: "assistant",
+                content: text,
+              },
+            }),
+          ]);
         } catch (error) {
-          console.error("Failed to save assistant message:", error);
+          console.error("Failed to save messages:", error);
         }
       }
     },

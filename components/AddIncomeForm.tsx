@@ -24,6 +24,15 @@ export default function AddIncomeForm() {
             className="block w-full rounded-lg border-slate-200 border p-2.5 text-slate-900 focus:ring-slate-900 focus:border-slate-900"
           />
         </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-700 mb-1">Izoh (ixtiyoriy)</label>
+          <input
+            type="text"
+            name="description"
+            className="block w-full rounded-lg border-slate-200 border p-2.5 text-slate-900 focus:ring-slate-900 focus:border-slate-900"
+            placeholder="Oylik maosh, biznes, sovg'a..."
+          />
+        </div>
         <button
           type="submit"
           className="w-full bg-slate-900 text-white font-medium p-2.5 rounded-lg hover:bg-slate-800 transition-colors"

@@ -76,27 +76,58 @@ export default async function Home() {
               <div className="-m-2 rounded-xl bg-slate-900/5 p-2 ring-1 ring-inset ring-slate-900/10 lg:-m-4 lg:rounded-2xl lg:p-4 max-w-5xl mx-auto shadow-2xl">
                 <div className="bg-white rounded-md shadow-sm ring-1 ring-slate-900/10 overflow-hidden relative" style={{ paddingBottom: '56.25%' }}>
                    {/* This is a mockup placeholder for the app screenshot */}
-                   <div className="absolute inset-0 flex items-center justify-center bg-slate-100 flex-col border-4 border-white rounded-lg">
-                     <div className="w-full h-12 bg-slate-800 flex items-center px-4 gap-2 border-b border-slate-700">
-                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                        <div className="w-3 h-3 rounded-full bg-amber-400"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                   <div className="absolute inset-0 flex items-center justify-center bg-slate-50 flex-col border-4 border-white rounded-lg shadow-inner overflow-hidden">
+                     {/* Window header */}
+                     <div className="w-full h-10 bg-slate-100 flex items-center px-4 gap-2 border-b border-slate-200">
+                        <div className="w-3 h-3 rounded-full bg-red-400/80"></div>
+                        <div className="w-3 h-3 rounded-full bg-amber-400/80"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-400/80"></div>
+                        <div className="ml-4 w-48 h-4 bg-white rounded-md mx-auto border border-slate-200"></div>
                      </div>
+                     {/* Window body */}
                      <div className="flex-1 w-full flex">
-                       <div className="w-1/4 h-full bg-slate-50 border-r border-slate-200 p-4 space-y-4">
-                         <div className="w-full h-8 bg-slate-200 rounded-md"></div>
-                         <div className="w-3/4 h-8 bg-slate-200 rounded-md"></div>
-                         <div className="w-5/6 h-8 bg-slate-200 rounded-md"></div>
+                       {/* Sidebar */}
+                       <div className="w-1/4 h-full bg-white border-r border-slate-200 p-4 space-y-4 pt-6">
+                         <div className="w-full h-8 bg-slate-100 rounded-md"></div>
+                         <div className="w-3/4 h-8 bg-slate-50 rounded-md"></div>
+                         <div className="w-5/6 h-8 bg-slate-50 rounded-md"></div>
+                         <div className="w-4/5 h-8 bg-slate-50 rounded-md"></div>
                        </div>
-                       <div className="w-3/4 h-full bg-white p-8 space-y-6">
-                         <div className="flex gap-4">
-                           <div className="w-1/3 h-24 bg-slate-100 rounded-xl border border-slate-200"></div>
-                           <div className="w-1/3 h-24 bg-slate-100 rounded-xl border border-slate-200"></div>
-                           <div className="w-1/3 h-24 bg-slate-100 rounded-xl border border-slate-200"></div>
+                       {/* Main Content */}
+                       <div className="w-3/4 h-full bg-slate-50 p-6 space-y-6">
+                         {/* Header */}
+                         <div className="flex justify-between items-center pb-4 border-b border-slate-200">
+                           <div className="w-32 h-6 bg-slate-200 rounded-md"></div>
+                           <div className="w-8 h-8 bg-slate-200 rounded-full"></div>
                          </div>
-                         <div className="flex gap-4 h-48">
-                           <div className="w-2/3 h-full bg-slate-100 rounded-xl border border-slate-200"></div>
-                           <div className="w-1/3 h-full bg-slate-100 rounded-xl border border-slate-200 rounded-full"></div>
+                         {/* Stats Row */}
+                         <div className="flex gap-4">
+                           <div className="w-1/3 p-4 bg-white rounded-xl border border-slate-200 shadow-sm space-y-2">
+                             <div className="w-16 h-3 bg-slate-100 rounded"></div>
+                             <div className="w-24 h-6 bg-emerald-500/20 rounded"></div>
+                           </div>
+                           <div className="w-1/3 p-4 bg-white rounded-xl border border-slate-200 shadow-sm space-y-2">
+                             <div className="w-16 h-3 bg-slate-100 rounded"></div>
+                             <div className="w-24 h-6 bg-slate-800 rounded"></div>
+                           </div>
+                           <div className="w-1/3 p-4 bg-white rounded-xl border border-slate-200 shadow-sm space-y-2">
+                             <div className="w-16 h-3 bg-slate-100 rounded"></div>
+                             <div className="w-24 h-6 bg-slate-200 rounded"></div>
+                           </div>
+                         </div>
+                         {/* Charts Row */}
+                         <div className="flex gap-4 h-40">
+                           <div className="w-2/3 h-full bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex items-end gap-2">
+                             <div className="w-1/6 h-[60%] bg-slate-200 rounded-t-md"></div>
+                             <div className="w-1/6 h-[80%] bg-slate-800 rounded-t-md"></div>
+                             <div className="w-1/6 h-[40%] bg-slate-200 rounded-t-md"></div>
+                             <div className="w-1/6 h-[90%] bg-slate-800 rounded-t-md"></div>
+                             <div className="w-1/6 h-[50%] bg-slate-200 rounded-t-md"></div>
+                             <div className="w-1/6 h-[70%] bg-slate-800 rounded-t-md"></div>
+                           </div>
+                           <div className="w-1/3 h-full bg-white rounded-xl border border-slate-200 shadow-sm flex items-center justify-center">
+                             <div className="w-24 h-24 rounded-full border-8 border-slate-800 border-r-slate-200"></div>
+                           </div>
                          </div>
                        </div>
                      </div>
@@ -108,9 +139,9 @@ export default async function Home() {
         </div>
 
         {/* Features section */}
-        <div id="features" className="mx-auto max-w-7xl px-6 lg:px-8 py-24 sm:py-32 bg-white">
+        <div id="features" className="mx-auto max-w-7xl px-6 lg:px-8 py-24 sm:py-32 bg-slate-50">
           <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-base font-semibold leading-7 text-indigo-600">Imkoniyatlar</h2>
+            <h2 className="text-base font-semibold leading-7 text-slate-900">Imkoniyatlar</h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl text-balance">
               Barcha moliyaviy vositalar bitta joyda
             </p>

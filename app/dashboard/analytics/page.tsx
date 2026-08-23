@@ -6,8 +6,13 @@ import AnalyticsCharts from "./AnalyticsCharts";
 
 export default async function AnalyticsPage() {
   const session = await getServerSession(authOptions);
-  const user = session?.user as { id: string; email: string } | undefined;
-  if (!user?.id) redirect("/login");
+  if (!session?.user?.email) redirect("/login");
+
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email },
+  });
+
+  if (!user) redirect("/login");
 
 
 

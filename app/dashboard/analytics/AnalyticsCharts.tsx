@@ -170,8 +170,8 @@ export default function AnalyticsCharts({
                   paddingAngle={2}
                   dataKey="value"
                 >
-                  {categoryData.map((_, idx) => (
-                    <Cell key={idx} fill={PIE_COLORS[idx % PIE_COLORS.length]} />
+                  {categoryData.map((cat, idx) => (
+                    <Cell key={cat.name} fill={PIE_COLORS[idx % PIE_COLORS.length]} />
                   ))}
                 </Pie>
                 <Tooltip content={<PieTooltip />} />

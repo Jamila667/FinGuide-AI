@@ -24,9 +24,10 @@ model Income {
   id        String   @id @default(uuid())
   userId    String
   amount    Float
-  currency  String   @default("UZS")
-  month     String
-  createdAt DateTime @default(now())
+  currency    String   @default("UZS")
+  month       String
+  description String?
+  createdAt   DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id])
 }

@@ -8,9 +8,6 @@ const nextConfig = {
     // TypeScript xatolarini ham e'tiborsiz qoldiradi
     ignoreBuildErrors: true,
   },
-  experimental: {
-    serverComponentsExternalPackages: ['pg', 'bcryptjs', '@prisma/adapter-pg'],
-  },
 };
 
 export default nextConfig;

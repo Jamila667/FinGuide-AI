@@ -1,5 +1,5 @@
 export function calculateCreditSimulation(principal: number, annualRate: number, termMonths: number) {
-  if (principal <= 0 || annualRate <= 0 || termMonths <= 0) {
+  if (principal <= 0 || annualRate < 0 || termMonths <= 0) {
     return {
       monthlyPayment: 0,
       totalRepayment: 0,
@@ -7,6 +7,14 @@ export function calculateCreditSimulation(principal: number, annualRate: number,
     };
   }
   
+  if (annualRate === 0) {
+    return {
+      monthlyPayment: principal / termMonths,
+      totalRepayment: principal,
+      totalInterest: 0,
+    };
+  }
+
   const r = annualRate / 12 / 100;
   const n = termMonths;
   const monthlyPayment = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);

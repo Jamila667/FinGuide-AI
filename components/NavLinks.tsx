@@ -2,11 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function NavLinks() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   
   const links = [
     { href: "/dashboard", label: "Asosiy" },
@@ -49,7 +60,7 @@ export default function NavLinks() {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="absolute top-16 left-0 right-0 bg-white border-b border-slate-200 p-4 md:hidden z-50 shadow-lg">
+        <div ref={menuRef} className="absolute top-16 left-0 right-0 bg-white border-b border-slate-200 p-4 md:hidden z-50 shadow-lg">
           <nav className="flex flex-col space-y-4 text-sm font-medium">
             {links.map((link) => {
               const isActive = pathname === link.href;

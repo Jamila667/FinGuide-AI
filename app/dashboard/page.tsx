@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import AddIncomeForm from "@/components/AddIncomeForm";
@@ -8,9 +9,13 @@ import ExpenseList from "@/components/ExpenseList";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
-  const user = session?.user as { id: string; email: string } | undefined;
+  if (!session?.user?.email) redirect("/login");
 
-  if (!user || !user.id) return null; // Middleware will redirect anyway
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email },
+  });
+
+  if (!user) redirect("/login");
 
   // Fetch data
   const incomes = await prisma.income.findMany({ 
