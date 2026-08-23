@@ -1,55 +1,55 @@
 # MVP Development Roadmap
 
 ## Phase 1 — Project Setup
-- [ ] Create repository
-- [ ] Initialize frontend
-- [ ] Initialize backend
-- [ ] Configure environment variables
-- [ ] Connect database
+- [x] Create repository
+- [x] Initialize frontend
+- [x] Initialize backend
+- [x] Configure environment variables
+- [x] Connect database
 
 ## Phase 2 — Authentication
-- [ ] Sign up
-- [ ] Login
-- [ ] Logout
-- [ ] Protected routes
+- [x] Sign up
+- [x] Login
+- [x] Logout
+- [x] Protected routes
 
 ## Phase 3 — Financial Tracking
-- [ ] Income CRUD
-- [ ] Expense CRUD
-- [ ] Categories
-- [ ] Dashboard calculations
+- [x] Income CRUD
+- [x] Expense CRUD
+- [x] Categories
+- [x] Dashboard calculations
 
 ## Phase 4 — Savings Goal
-- [ ] Goal creation
-- [ ] Progress calculation
-- [ ] Estimated months
+- [x] Goal creation
+- [x] Progress calculation
+- [x] Estimated months
 
 ## Phase 5 — Credit Simulator
-- [ ] Loan input
-- [ ] Monthly payment formula
-- [ ] Total repayment
-- [ ] Interest calculation
-- [ ] Risk explanation
+- [x] Loan input
+- [x] Monthly payment formula
+- [x] Total repayment
+- [x] Interest calculation
+- [x] Risk explanation
 
 ## Phase 6 — AI Advisor
-- [ ] Claude API integration
-- [ ] Context builder
-- [ ] System prompt
-- [ ] Chat UI
-- [ ] Error handling
-- [ ] Rate limiting
+- [x] Claude API integration
+- [x] Context builder
+- [x] System prompt
+- [x] Chat UI
+- [x] Error handling
+- [x] Rate limiting
 
 ## Phase 7 — Testing
-- [ ] Unit tests for financial formulas
-- [ ] API tests
-- [ ] Authentication tests
-- [ ] AI response tests
-- [ ] Mobile responsiveness
-- [ ] Security checks
+- [x] Unit tests for financial formulas
+- [x] API tests
+- [x] Authentication tests
+- [x] AI response tests
+- [x] Mobile responsiveness
+- [x] Security checks
 
 ## Phase 8 — Deployment
-- [ ] Production database
-- [ ] Backend deployment
-- [ ] Frontend deployment
-- [ ] Environment variables
+- [x] Production database
+- [ ] Backend deployment (Vercel)
+- [ ] Frontend deployment (Vercel)
+- [ ] Environment variables (Vercel sozlamalariga kiritish)
 - [ ] Final QA

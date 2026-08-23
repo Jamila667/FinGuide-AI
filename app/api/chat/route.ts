@@ -25,6 +25,22 @@ export async function POST(req: Request) {
     return new Response("Bad request: messages required", { status: 400 });
   }
 
+  // Rate limiting: max 5 messages per minute per user
+  const oneMinuteAgo = new Date(Date.now() - 60 * 1000);
+  const recentMessagesCount = await prisma.advisorMessage.count({
+    where: {
+      userId: user.id,
+      role: "user",
+      createdAt: {
+        gte: oneMinuteAgo,
+      },
+    },
+  });
+
+  if (recentMessagesCount >= 5) {
+    return new Response("Too many requests. Please try again in a minute.", { status: 429 });
+  }
+
   // Save user's new message to DB
   const lastMessage = messages[messages.length - 1];
   if (lastMessage?.role === "user" && typeof lastMessage.content === "string") {
