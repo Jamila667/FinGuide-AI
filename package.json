@@ -20,6 +20,7 @@
     "next": "14.2.35",
     "next-auth": "^4.24.15",
     "pg": "^8.23.0",
+    "prisma": "^7.9.1",
     "react": "^18",
     "react-dom": "^18",
     "recharts": "^3.10.1"
@@ -37,7 +38,6 @@
     "eslint-config-next": "14.2.35",
     "jsdom": "^30.0.1",
     "postcss": "^8",
-    "prisma": "^7.9.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5",
     "vitest": "^4.1.11"
